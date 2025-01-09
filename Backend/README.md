@@ -51,3 +51,49 @@ The request body should be a JSON object containing the following fields:
   }
 }
 ```
+
+## Endpoint
+
+`/users/login`
+
+### HTTP Method
+
+`POST`
+
+## Description
+
+This endpoint is used to log in an existing user. It requires the user's email and password.
+
+## Request Data
+
+The request body should be a JSON object containing the following fields:
+
+- `email` (string, required): The email address of the user. Must be a valid email format.
+- `password` (string, required): The password for the user. Must be at least 6 characters long.
+
+### Example Request
+
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}
+```
+
+### Example Response
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "_id": "60d0fe4f5311236168a109ca",
+    "fullName": {
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    "email": "john.doe@example.com",
+    "password": "$2b$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36Zf4aWJm1J3yQW5Zf5Zf5G",
+    "__v": 0
+  }
+}
+```
