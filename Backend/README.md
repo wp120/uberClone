@@ -97,3 +97,58 @@ The request body should be a JSON object containing the following fields:
   }
 }
 ```
+
+## Endpoint
+
+`/users/profile`
+
+### HTTP Method
+
+`GET`
+
+## Description
+
+This endpoint is used to get the profile of the currently logged-in user. It requires the user to be authenticated.
+
+## Request Data
+
+No request body is required. The user must be authenticated via a valid token.
+
+### Example Response
+
+```json
+{
+  "user": {
+    "_id": "60d0fe4f5311236168a109ca",
+    "fullName": {
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    "email": "john.doe@example.com"
+  }
+}
+```
+
+## Endpoint
+
+`/users/logout`
+
+### HTTP Method
+
+`GET`
+
+## Description
+
+This endpoint is used to log out the currently logged-in user. It requires the user to be authenticated.
+
+## Request Data
+
+No request body is required. The user must be authenticated via a valid token.
+
+### Example Response
+
+```json
+{
+  "message": "Logged out successfully"
+}
+```
