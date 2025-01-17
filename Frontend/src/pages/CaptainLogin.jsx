@@ -1,18 +1,35 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { login } from "../features/authSlice";
+import { useDispatch } from "react-redux";
 
 const Captainlogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // eslint-disable-next-line no-unused-vars
-  const [captainData, setCaptainData] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    setCaptainData({
+    const captainData = {
       email: email,
-      password,
-    });
+      password: password,
+    };
+
+    const response = await axios.post(
+      import.meta.env.VITE_BASE_URL + "/captains/login",
+      captainData
+    );
+
+    if (response.status === 200) {
+      localStorage.setItem("token", response.data.token);
+      dispatch(login({ isCaptain: true, captainData: response.data.captain }));
+      navigate("/captain-home");
+    } else {
+      alert("Invalid Email or Password");
+    }
+
     setEmail("");
     setPassword("");
   };

@@ -1,20 +1,37 @@
-/* eslint-disable no-unused-vars */
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../features/authSlice";
+import axios from "axios";
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    setUserData({
+    const userData = {
       email: email,
       password: password,
-    });
-    setEmail("");
-    setPassword("");
+    };
+
+    const response = await axios.post(
+      import.meta.env.VITE_BASE_URL + "/users/login",
+      userData
+    );
+
+    if (response.status === 200) {
+      dispatch(login({ isCaptain: false, userData: response.data.user }));
+      setEmail("");
+      setPassword("");
+      localStorage.setItem("token", response.data.token);
+      navigate("/home");
+    } else {
+      console.log(response.data);
+      alert("Errors: ", response.data.errors);
+    }
   };
 
   return (
