@@ -9,6 +9,7 @@ import CaptainHome from "./CaptainHome";
 import CaptainProtectWrapper from "./CaptainProtectWrapper";
 import CaptainLogout from "./CaptainLogout";
 import Riding from "./Riding";
+import CaptainRiding from "./CaptainRiding";
 
 export {
   Start,
@@ -22,4 +23,5 @@ export {
   CaptainProtectWrapper,
   CaptainLogout,
   Riding,
+  CaptainRiding,
 };
