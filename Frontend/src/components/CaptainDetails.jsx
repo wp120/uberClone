@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import { CaptainDataContext } from "../context/CapatainContext";
+import { useSelector } from "react-redux";
 
 const CaptainDetails = () => {
-  const { captain } = useContext(CaptainDataContext);
+  const captain = useSelector((state) => state.authSlice.captainData);
 
   return (
     <div>
